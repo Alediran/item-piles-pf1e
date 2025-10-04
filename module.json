@@ -10,7 +10,7 @@
   "authors": [
     {
       "name": "Alediran",
-      "url": "https://github.com/Alediran/item-piles-pf1e",
+      "url": "https://github.com/Alediran/",
       "flags": {}
     }
   ],
@@ -32,5 +32,6 @@
         "compatibility": {}
       }
     ]
-  }
+  },
+  "url": "https://github.com/Alediran/item-piles-pf1e/"
 }
