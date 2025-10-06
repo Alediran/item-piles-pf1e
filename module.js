@@ -31,8 +31,10 @@ Hooks.once("item-piles-ready", async () => {
     // This function is an optional system handler that specifically transforms an item when it is added to actors, eg turns it into a spell scroll if it was a spell
     ITEM_TRANSFORMER: async (itemData) => {
       if (itemData.type === "spell") {
-        //Implement API call to create Potion/Wand/Scroll. For now we don't want to have spells in the item pile.
-        return null;
+        debugger;
+        return pf1.documents.item.ItemSpellPF.toConsumablePrompt(itemData, {
+          allowSpell: false,
+        });
       }
 
       return itemData;
