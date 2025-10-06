@@ -1,9 +1,18 @@
 Hooks.once("item-piles-ready", async () => {
   const data = {
-    VERSION: "1.0.0",
+    VERSION: "1.0.1",
 
     // The actor class type is the type of actor that will be used for the default item pile actor that is created on first item drop.
-    ACTOR_CLASS_TYPE: "character",
+    ACTOR_CLASS_TYPE: "npc",
+
+    // The item class type is the type of item that will be used for the default loot item
+    ITEM_CLASS_LOOT_TYPE: "loot",
+
+    // The item class type is the type of item that will be used for the default weapon item
+    ITEM_CLASS_WEAPON_TYPE: "weapon",
+
+    // The item class type is the type of item that will be used for the default equipment item
+    ITEM_CLASS_EQUIPMENT_TYPE: "equipment",
 
     // The item quantity attribute is the path to the attribute on items that denote how many of that item that exists
     ITEM_QUANTITY_ATTRIBUTE: "system.quantity",
@@ -15,19 +24,28 @@ Hooks.once("item-piles-ready", async () => {
     ITEM_FILTERS: [
       {
         path: "",
-        filters: "class, spell, feat, buff, attack, race, implant",
+        filters: "class, spell, feat, buff, attack, race",
       },
     ],
 
     // This function is an optional system handler that specifically transforms an item when it is added to actors, eg turns it into a spell scroll if it was a spell
     ITEM_TRANSFORMER: async (itemData) => {
+      if (itemData.type === "spell") {
+        //Implement API call to create Potion/Wand/Scroll. For now we don't want to have spells in the item pile.
+        return null;
+      }
+
       return itemData;
     },
 
     // This function is an optional system handler that specifically transforms an item's price into a more unified numeric format
     // READ: OPTIONAL - this is ONLY NEEDED if your system's price attribute is NOT a number
     ITEM_COST_TRANSFORMER: (item, currencies, price_property) => {
-      return Number(foundry.utils.getProperty(item, price_property)) ?? 0;
+      return item.getValue({
+        sellValue: 1.0,
+        single: true,
+        inLowestDenomination: false,
+      });
     },
 
     UNSTACKABLE_ITEM_TYPES: ["weapon", "container", "equipment"],
@@ -35,7 +53,15 @@ Hooks.once("item-piles-ready", async () => {
     PILE_DEFAULTS: {},
 
     // Item similarities determines how item piles detect similarities and differences in the system
-    ITEM_SIMILARITIES: ["name", "type"],
+    ITEM_SIMILARITIES: [
+      "name",
+      "type",
+      "system.subType",
+      "system.masterwork",
+      "system.enh",
+      "system.armor.enh",
+      "system.broken",
+    ],
 
     // Currencies in item piles is a versatile system that can accept actor attributes (a number field on the actor's sheet) or items (actual items in their inventory)
     // In the case of attributes, the path is relative to the "actor.system"
@@ -43,7 +69,7 @@ Hooks.once("item-piles-ready", async () => {
     CURRENCIES: [
       {
         type: "attribute",
-        name: "Platinum",
+        name: "PF1.Currency.Full.pp",
         img: "systems/pf1/icons/items/inventory/coin-silver.jpg",
         abbreviation: "{#}PP",
         data: {
@@ -56,7 +82,7 @@ Hooks.once("item-piles-ready", async () => {
       },
       {
         type: "attribute",
-        name: "Gold Coins",
+        name: "PF1.Currency.Full.gp",
         img: "systems/pf1/icons/items/inventory/coins-gold.jpg",
         abbreviation: "{#}GP",
         data: {
@@ -69,7 +95,7 @@ Hooks.once("item-piles-ready", async () => {
       },
       {
         type: "attribute",
-        name: "Silver",
+        name: "PF1.Currency.Full.sp",
         img: "systems/pf1/icons/items/inventory/coins-silver.jpg",
         abbreviation: "{#}SP",
         data: {
@@ -82,7 +108,7 @@ Hooks.once("item-piles-ready", async () => {
       },
       {
         type: "attribute",
-        name: "Copper",
+        name: "PF1.Currency.Full.cp",
         img: "systems/pf1/icons/items/inventory/coin-copper.jpg",
         abbreviation: "{#}CP",
         data: {
