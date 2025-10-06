@@ -2,7 +2,7 @@
   "id": "item-piles-pf1e",
   "title": "Item Piles: PF1e",
   "description": "<div class=\"Box-sc-g0xbh4-0 eoaCFS js-snippet-clipboard-copy-unpositioned undefined\"><p>This is a module that enables the PF2e Foundry system to work seamlessly with <a href=\"https://foundryvtt.com/packages/item-piles\" rel=\"nofollow\">Item Piles</a>.</p><p>Built using the <a href=\"https://github.com/fantasycalendar/FoundryVTT-ItemPiles-System-Template\" rel=\"nofollow\" target=\"_blank\">ItemPiles System Template</a></p></div>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
