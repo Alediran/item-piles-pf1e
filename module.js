@@ -31,7 +31,6 @@ Hooks.once("item-piles-ready", async () => {
     // This function is an optional system handler that specifically transforms an item when it is added to actors, eg turns it into a spell scroll if it was a spell
     ITEM_TRANSFORMER: async (itemData) => {
       if (itemData.type === "spell") {
-        debugger;
         return pf1.documents.item.ItemSpellPF.toConsumablePrompt(itemData, {
           allowSpell: false,
         });
