@@ -1,6 +1,6 @@
 Hooks.once("item-piles-ready", async () => {
   const data = {
-    VERSION: "1.0.1",
+    VERSION: "1.0.2",
 
     // The actor class type is the type of actor that will be used for the default item pile actor that is created on first item drop.
     ACTOR_CLASS_TYPE: "npc",
