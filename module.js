@@ -23,7 +23,7 @@ Hooks.once("item-piles-ready", async () => {
     // Item filters actively remove items from the item pile inventory UI that users cannot loot, such as spells, feats, and classes
     ITEM_FILTERS: [
       {
-        path: "",
+        path: "type",
         filters: "class, spell, feat, buff, attack, race",
       },
     ],
